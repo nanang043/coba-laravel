@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\form;
+use App\Models\category;
 use Illuminate\Http\Request;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardPostController extends Controller
 {
@@ -29,7 +31,11 @@ class DashboardPostController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.post.create', [
+
+            'categories' => category::all()
+
+        ]);
     }
 
     /**
@@ -40,7 +46,7 @@ class DashboardPostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
     /**
@@ -91,5 +97,11 @@ class DashboardPostController extends Controller
     public function destroy(form $form)
     {
         //
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(form::class, 'slug', $request->title);
+        return response()->json(['slug' => $slug]);
     }
 }

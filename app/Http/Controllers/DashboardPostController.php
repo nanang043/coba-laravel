@@ -15,8 +15,6 @@ class DashboardPostController extends Controller
     public function index()
     {
 
-
-
         return view('dashboard.post.index', [
 
             'posts' =>  form::where('user_id', auth()->user()->id)->get()
@@ -51,9 +49,14 @@ class DashboardPostController extends Controller
      * @param  \App\Models\form  $form
      * @return \Illuminate\Http\Response
      */
-    public function show(form $form)
+    public function show( $form)
     {
-          return $form; 
+        return view('dashboard.post.show', [
+
+           'post' => $form = form::where('slug', $form)->first()
+        ]); 
+    
+
     
     }     
     /**

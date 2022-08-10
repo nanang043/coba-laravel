@@ -51,18 +51,18 @@ Route::get('/form', [formcontroller::class, 'index']);
 Route::get('/forms/{form:slug}', [formcontroller::class, 'show']);
 
 
-Route::get('/categories', function() {
+// Route::get('/categories', function() {
 
-    return view('categories', [
+//     return view('categories', [
 
-        'title' => 'category',
-        'active' => 'categories',
-        'categories' => category::all()
+//         'title' => 'category',
+//         'active' => 'categories',
+//         'categories' => category::all()
         
 
-    ]);
+//     ]);
 
-});
+// });
 
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');

@@ -8,7 +8,15 @@
 </div>
 <div class="my-2">
 <a href="/dashboard/posts/create" class="btn btn-primary">Create New Post</a>
-</div>        
+</div>   
+
+@if(session()->has('success'))
+
+<div class="alert alert-success" role="alert">
+  {{ session('success') }}
+</div>
+
+@endif     
 
 <h2>Section title</h2>
       <div class="table-responsive">

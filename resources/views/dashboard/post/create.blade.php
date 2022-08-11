@@ -11,34 +11,65 @@
 <div class="col-lg-8">
 <form action="/dashboard/posts" method="post">
 	@csrf
-  <div class="mb-3">
-    <label for="title" class="form-label">Title</label>
-    <input type="text" class="form-control" id="title" name="title">
-  </div> 
 
   <div class="mb-3">
-    <label for="slug" class="form-label">Slug</label>
-    <input type="text" class="form-control" id="slug" name="slug">
+  <label for="name" class="form-label">Your name</label>
+  <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" autofocus>
+    @error('name')
+  <div class="invalid-feedback">
+    {{ $message }}
+    </div>
+    @enderror
   </div>
 
   <div class="mb-3">
-    <label for="category" class="form-label">Category</label>
+    <label for="title" class="form-label">Title</label>
+    <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" autofocus>
+    @error('title')
+  <div class="invalid-feedback">
+    {{ $message }}
+    </div>
+    @enderror
+  </div>
+
+  <div class="mb-3">
+    <label for="slug" class="form-label">Slug</label>
+    <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" value="{{ old('slug') }}">
+    @error('slug')
+    <div class="invalid-feedback">
+    {{ $message }}
+    </div>
+
+    @enderror
+ 
+  </div>
+
+  <div class="mb-3">
+    <label for="category_id" class="form-label">Category</label>
     <select class="form-select" name="category_id">
       @foreach($categories as $category)
+      @if( old('category_id') == $category->id)
+      <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+      @else
       <option value="{{ $category->id }}">{{ $category->name }}</option>
+      @endif
       @endforeach
     </select>
   </div> 
 
   <div class="mb-3">
-    <label for="deskripsi" class="form-label">Deskripsi</label>
-   
-      <input id="deskripsi" type="hidden" name="deskripsi">
-      <trix-editor input="deskripsi"></trix-editor>
-    
+    <label for="deskripsi" class="form-label">Deskripsi</label> 
+
+    @error('deskripsi')
+    <p class="text-danger">{{ $message }}</p>
+    @enderror
+
+  </div>
+      <input id="deskripsi" type="hidden" name="deskripsi" value="{{ old('deskripsi') }}">
+      <trix-editor input="deskripsi"></trix-editor>    
   </div> 
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary my-4">Submit</button>
 </form>
 </div>  
 

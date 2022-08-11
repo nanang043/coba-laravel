@@ -14,6 +14,15 @@ class form extends Model
     // protected $fillable = ['name', 'title', 'excerpt', 'deskripsi'];
 
     protected $guarted = ['id'];
+    protected $fillable = [
+        'title',
+        'slug',
+        'excerpt',
+        'deskripsi',
+        'category_id',
+        'user_id',
+        'name'
+    ];
     protected $with = ['category', 'author'];
 
     public function scopeFilter($query, array $filters)
